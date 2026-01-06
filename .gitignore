@@ -1,0 +1,17 @@
+# --- Basura de sistema ---
+.DS_Store
+Thumbs.db
+
+# --- Python (Backend) ---
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/sql_app.db    # <--- IMPORTANTE: No subir tu DB local
+backend/.env          # <--- IMPORTANTE: No subir tus claves
+
+# --- Node/React (Frontend) ---
+client/node_modules/  # <--- IMPORTANTE: Esto pesa muchísimo, no se sube
+client/dist/
+client/build/
+client/.env
+client/.env.local
