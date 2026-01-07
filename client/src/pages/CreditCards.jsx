@@ -29,9 +29,9 @@ const CreditCards = () => {
 
   const fetchData = async () => {
     try {
-      const cardRes = await axios.get(`http://127.0.0.1:8000/users/${user.id}/credit-cards/`)
+      const cardRes = await axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/credit-cards/`)
       setCards(cardRes.data)
-      const accRes = await axios.get(`http://127.0.0.1:8000/users/${user.id}/accounts/`)
+      const accRes = await axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/accounts/`)
       setAccounts(accRes.data)
     } catch (error) { console.error(error) }
   }
@@ -86,7 +86,7 @@ const CreditCards = () => {
   const handleCreateCard = async (e) => {
     e.preventDefault()
     try {
-        await axios.post(`http://127.0.0.1:8000/users/${user.id}/credit-cards/`, {
+        await axios.post(`https://fin-pro-t78k.onrender.com/users/${user.id}/credit-cards/`, {
             name: newCardData.name, limit: parseFloat(newCardData.limit), closing_day: parseInt(newCardData.closing_day)
         })
         setIsCreateOpen(false); fetchData()
@@ -103,7 +103,7 @@ const CreditCards = () => {
   const submitExpense = async (e) => {
     e.preventDefault()
     try {
-        await axios.post(`http://127.0.0.1:8000/credit-cards/${selectedCard.id}/purchases/`, {
+        await axios.post(`https://fin-pro-t78k.onrender.com/credit-cards/${selectedCard.id}/purchases/`, {
             ...expenseData,
             amount: parseFloat(expenseData.amount),
             installments: expenseData.is_recurring ? 1 : parseInt(expenseData.installments)
@@ -116,7 +116,7 @@ const CreditCards = () => {
   const handleViewSummary = async (card) => {
     setSelectedCard(card)
     try {
-        const res = await axios.get(`http://127.0.0.1:8000/credit-cards/${card.id}/purchases/`)
+        const res = await axios.get(`https://fin-pro-t78k.onrender.com/credit-cards/${card.id}/purchases/`)
         setSelectedCardPurchases(res.data)
         setIsSummaryOpen(true)
     } catch (error) { toast.error("Error al cargar resumen") }
@@ -125,8 +125,8 @@ const CreditCards = () => {
   const handleDeletePurchase = async (purchaseId) => {
     if(!confirm("¿Borrar esta compra?")) return
     try {
-        await axios.delete(`http://127.0.0.1:8000/card-purchases/${purchaseId}`)
-        const res = await axios.get(`http://127.0.0.1:8000/credit-cards/${selectedCard.id}/purchases/`)
+        await axios.delete(`https://fin-pro-t78k.onrender.com/card-purchases/${purchaseId}`)
+        const res = await axios.get(`https://fin-pro-t78k.onrender.com/credit-cards/${selectedCard.id}/purchases/`)
         setSelectedCardPurchases(res.data)
         toast.success("Compra eliminada") // <--- TOAST
     } catch (error) { toast.error("Error al eliminar") }
@@ -148,7 +148,7 @@ const CreditCards = () => {
     let description = `Pago Tarjeta (${monthName})`
     if (totalUSD > 0) { finalAmount += (totalUSD * parseFloat(exchangeRate)); description += ` (+ U$S ${totalUSD})` }
     try {
-        await axios.post(`http://127.0.0.1:8000/users/${user.id}/transactions/`, {
+        await axios.post(`https://fin-pro-t78k.onrender.com/users/${user.id}/transactions/`, {
             amount: -Math.abs(finalAmount), description: description, account_id: parseInt(payAccountId), category_id: 1, date: new Date().toISOString().split('T')[0]
         })
         setIsPaying(false); setIsPayModalOpen(false); setIsSummaryOpen(false); fetchData()

@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   // Función para pedir datos del usuario al backend usando el token
   const fetchUser = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:8000/users/me/')
+      const res = await axios.get('https://fin-pro-t78k.onrender.com/users/me/')
       setUser(res.data) // Guardamos { id, email, is_active }
     } catch (error) {
       console.error("Error validando token", error)

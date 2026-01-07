@@ -30,7 +30,7 @@ const Login = () => {
     formData.append('password', password)
 
     try {
-      const res = await axios.post('http://127.0.0.1:8000/token', formData)
+      const res = await axios.post('https://fin-pro-t78k.onrender.com/token', formData)
       login(res.data.access_token)
       toast.success("¡Bienvenido de nuevo! 👋")
       // YA NO HACEMOS navigate() ACÁ. DEJAMOS QUE EL useEffect LO HAGA.

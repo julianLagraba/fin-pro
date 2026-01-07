@@ -21,14 +21,14 @@ const Analytics = () => {
   const fetchData = async () => {
     try {
       const [transRes, clientRes, cardRes, subRes] = await Promise.all([
-         axios.get(`http://127.0.0.1:8000/users/${user.id}/transactions/`),
-         axios.get(`http://127.0.0.1:8000/users/${user.id}/clients/`),
-         axios.get(`http://127.0.0.1:8000/users/${user.id}/credit-cards/`),
-         axios.get(`http://127.0.0.1:8000/users/${user.id}/subscriptions/`)
+         axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/transactions/`),
+         axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/clients/`),
+         axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/credit-cards/`),
+         axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/subscriptions/`)
       ])
       
       const clientsWithJobs = await Promise.all(clientRes.data.map(async (c) => {
-          const jobsRes = await axios.get(`http://127.0.0.1:8000/clients/${c.id}/jobs/`)
+          const jobsRes = await axios.get(`https://fin-pro-t78k.onrender.com/clients/${c.id}/jobs/`)
           return { ...c, jobs: jobsRes.data }
       }))
 

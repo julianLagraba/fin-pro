@@ -15,9 +15,9 @@ const Settings = () => {
 
   const fetchData = async () => {
     try {
-      const accRes = await axios.get(`http://127.0.0.1:8000/users/${user.id}/accounts/`)
+      const accRes = await axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/accounts/`)
       setAccounts(accRes.data)
-      const catRes = await axios.get(`http://127.0.0.1:8000/users/${user.id}/categories/`)
+      const catRes = await axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/categories/`)
       setCategories(catRes.data)
     } catch (error) { console.error(error) }
   }
@@ -28,7 +28,7 @@ const Settings = () => {
     e.preventDefault()
     if (!newAccountName) return
     try {
-      await axios.post(`http://127.0.0.1:8000/users/${user.id}/accounts/`, {
+      await axios.post(`https://fin-pro-t78k.onrender.com/users/${user.id}/accounts/`, {
         name: newAccountName, balance: 0, currency: newAccountCurrency
       })
       setNewAccountName(''); setNewAccountCurrency('ARS'); fetchData()
@@ -39,7 +39,7 @@ const Settings = () => {
   const handleDeleteAccount = async (id) => {
     if(!confirm("¿Seguro querés eliminar esta cuenta? Se borrarán sus movimientos asociados.")) return
     try {
-        await axios.delete(`http://127.0.0.1:8000/accounts/${id}`)
+        await axios.delete(`https://fin-pro-t78k.onrender.com/accounts/${id}`)
         fetchData()
         toast.success("Cuenta eliminada") // <--- TOAST
     } catch (error) { toast.error("Error al eliminar cuenta") }
@@ -49,7 +49,7 @@ const Settings = () => {
     e.preventDefault()
     if (!newCategoryName) return
     try {
-      await axios.post(`http://127.0.0.1:8000/categories/`, { name: newCategoryName })
+      await axios.post(`https://fin-pro-t78k.onrender.com/categories/`, { name: newCategoryName })
       setNewCategoryName(''); fetchData()
       toast.success("Categoría agregada") // <--- TOAST
     } catch (error) { toast.error("Error al crear categoría") }
@@ -58,7 +58,7 @@ const Settings = () => {
   const handleDeleteCategory = async (id) => {
     if(!confirm("¿Eliminar categoría?")) return
     try {
-        await axios.delete(`http://127.0.0.1:8000/categories/${id}`)
+        await axios.delete(`https://fin-pro-t78k.onrender.com/categories/${id}`)
         fetchData()
         toast.success("Categoría eliminada") // <--- TOAST
     } catch (error) { toast.error("Error al eliminar categoría") }

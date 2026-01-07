@@ -18,8 +18,8 @@ const Subscriptions = () => {
   const fetchData = async () => {
     try {
       const [subRes, cardRes] = await Promise.all([
-        axios.get(`http://127.0.0.1:8000/users/${user.id}/subscriptions/`),
-        axios.get(`http://127.0.0.1:8000/users/${user.id}/credit-cards/`)
+        axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/subscriptions/`),
+        axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/credit-cards/`)
       ])
       setSubs(subRes.data)
       setCards(cardRes.data)
@@ -31,7 +31,7 @@ const Subscriptions = () => {
   const handleCreateSub = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`http://127.0.0.1:8000/users/${user.id}/subscriptions/`, {
+      await axios.post(`https://fin-pro-t78k.onrender.com/users/${user.id}/subscriptions/`, {
         ...newSub,
         price: parseFloat(newSub.price),
         billing_day: parseInt(newSub.billing_day),
@@ -47,7 +47,7 @@ const Subscriptions = () => {
   const handleDeleteSub = async (id) => {
     if(!confirm("¿Borrar suscripción? Nota: El gasto en la tarjeta deberás borrarlo manualmente.")) return
     try {
-        await axios.delete(`http://127.0.0.1:8000/subscriptions/${id}`) // Necesitarías endpoint de borrar
+        await axios.delete(`https://fin-pro-t78k.onrender.com/subscriptions/${id}`) // Necesitarías endpoint de borrar
         fetchData()
         toast.success("Suscripción borrada") // <--- TOAST
     } catch (error) { toast.error("Función borrar no implementada en backend aún") }

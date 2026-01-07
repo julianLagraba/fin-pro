@@ -26,9 +26,9 @@ const Clients = () => {
 
   const fetchData = async () => {
     try {
-      const resClients = await axios.get(`http://127.0.0.1:8000/users/${user.id}/clients/`)
+      const resClients = await axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/clients/`)
       setClients(resClients.data)
-      const resAccounts = await axios.get(`http://127.0.0.1:8000/users/${user.id}/accounts/`)
+      const resAccounts = await axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/accounts/`)
       setAccounts(resAccounts.data)
     } catch (error) { console.error(error) }
   }
@@ -48,7 +48,7 @@ const Clients = () => {
   const handleCreateClient = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`http://127.0.0.1:8000/users/${user.id}/clients/`, newClient)
+      await axios.post(`https://fin-pro-t78k.onrender.com/users/${user.id}/clients/`, newClient)
       setIsCreateOpen(false); setNewClient({ name: '', email: '', phone: '' }); fetchData()
       toast.success("Cliente creado") // <--- TOAST
     } catch (error) { toast.error("Error al crear cliente") }
@@ -57,7 +57,7 @@ const Clients = () => {
   const openClientDetail = async (client) => {
     setSelectedClient(client)
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/clients/${client.id}/jobs/`)
+      const res = await axios.get(`https://fin-pro-t78k.onrender.com/clients/${client.id}/jobs/`)
       setClientJobs(res.data)
     } catch (error) { console.error(error) }
   }
@@ -65,7 +65,7 @@ const Clients = () => {
   const handleCreateJob = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`http://127.0.0.1:8000/clients/${selectedClient.id}/jobs/`, { ...newJob, amount: parseFloat(newJob.amount) })
+      await axios.post(`https://fin-pro-t78k.onrender.com/clients/${selectedClient.id}/jobs/`, { ...newJob, amount: parseFloat(newJob.amount) })
       setIsJobFormOpen(false)
       setNewJob({ description: '', amount: '', date: new Date().toISOString().split('T')[0], currency: 'ARS' })
       openClientDetail(selectedClient) 
@@ -84,7 +84,7 @@ const Clients = () => {
     e.preventDefault()
     setIsPaying(true)
     try {
-      await axios.post(`http://127.0.0.1:8000/jobs/${jobToPay.id}/pay`, { 
+      await axios.post(`https://fin-pro-t78k.onrender.com/jobs/${jobToPay.id}/pay`, { 
         account_id: parseInt(payAccountId),
         exchange_rate: parseFloat(exchangeRate || 1)
       })

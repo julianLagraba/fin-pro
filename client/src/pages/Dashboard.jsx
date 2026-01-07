@@ -24,9 +24,9 @@ const Dashboard = () => {
     try {
       // <--- 3. USAMOS user.id EN LAS PETICIONES
       const [accRes, catRes, transRes] = await Promise.all([
-         axios.get(`http://127.0.0.1:8000/users/${user.id}/accounts/`),
-         axios.get(`http://127.0.0.1:8000/users/${user.id}/categories/`),
-         axios.get(`http://127.0.0.1:8000/users/${user.id}/transactions/`)
+         axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/accounts/`),
+         axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/categories/`),
+         axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/transactions/`)
       ])
       setAccounts(accRes.data)
       setCategories(catRes.data)
@@ -47,7 +47,7 @@ const Dashboard = () => {
   const handleCreateTransaction = async (data) => {
     try {
       // <--- 5. USAMOS user.id AL GUARDAR
-      await axios.post(`http://127.0.0.1:8000/users/${user.id}/transactions/`, { ...data })
+      await axios.post(`https://fin-pro-t78k.onrender.com/users/${user.id}/transactions/`, { ...data })
       setIsModalOpen(false)
       fetchData() // Recargar datos
       toast.success("Movimiento registrado")

@@ -12,7 +12,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://127.0.0.1:8000/register', { email, password })
+      await axios.post('https://fin-pro-t78k.onrender.com/register', { email, password })
       toast.success("¡Cuenta creada! Ahora iniciá sesión.")
       navigate('/login')
     } catch (error) {

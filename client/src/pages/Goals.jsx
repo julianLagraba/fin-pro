@@ -21,8 +21,8 @@ const Goals = () => {
   const fetchData = async () => {
     try {
       const [gRes, aRes] = await Promise.all([
-          axios.get(`http://127.0.0.1:8000/users/${user.id}/goals/`),
-          axios.get(`http://127.0.0.1:8000/users/${user.id}/accounts/`)
+          axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/goals/`),
+          axios.get(`https://fin-pro-t78k.onrender.com/users/${user.id}/accounts/`)
       ])
       setGoals(gRes.data)
       setAccounts(aRes.data)
@@ -34,7 +34,7 @@ const Goals = () => {
   const handleCreateGoal = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`http://127.0.0.1:8000/users/${user.id}/goals/`, { ...newGoal, target_amount: parseFloat(newGoal.target_amount) })
+      await axios.post(`https://fin-pro-t78k.onrender.com/users/${user.id}/goals/`, { ...newGoal, target_amount: parseFloat(newGoal.target_amount) })
       setIsCreateOpen(false); setNewGoal({ name: '', target_amount: '', currency: 'ARS', deadline: '' }); fetchData()
       toast.success("Nueva meta creada 🎯")
     } catch (error) { toast.error("Error al crear meta") }
@@ -43,7 +43,7 @@ const Goals = () => {
   const handleDeleteGoal = async (id) => {
       if(!confirm("¿Borrar meta? La plata acumulada NO volverá automáticamente a la cuenta.")) return
       try {
-          await axios.delete(`http://127.0.0.1:8000/goals/${id}`)
+          await axios.delete(`https://fin-pro-t78k.onrender.com/goals/${id}`)
           fetchData(); toast.success("Meta eliminada")
       } catch (error) { toast.error("Error") }
   }
@@ -58,7 +58,7 @@ const Goals = () => {
   const handleDeposit = async (e) => {
       e.preventDefault()
       try {
-          await axios.post(`http://127.0.0.1:8000/goals/${selectedGoal.id}/deposit`, {
+          await axios.post(`https://fin-pro-t78k.onrender.com/goals/${selectedGoal.id}/deposit`, {
               account_id: parseInt(depositData.account_id),
               amount: parseFloat(depositData.amount)
           })
